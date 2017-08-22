@@ -1,0 +1,31 @@
+_tensorboard()
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    #  The options to complete
+    opts="-h --help --logdir --host --port --purge_orphaned_data \
+    --nopurge_orphaned_data --reload_interval --inspect --noinspect --tag \
+    --event_file"
+
+
+    #  After completion for some of the options
+    case "${prev}" in
+        --logdir)
+        	_filedir -d
+        	return 0
+            ;;
+        --host|--event_file|--port)
+        	_filedir
+        	return 0
+            ;;
+        *)
+        ;;
+    esac
+
+   COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+   return 0
+}
+complete -F _tensorboard tensorboard
