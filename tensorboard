@@ -7,17 +7,17 @@ _tensorboard()
 
     #  The options to complete
     opts="-h --help --logdir --host --port --purge_orphaned_data \
-    --nopurge_orphaned_data --reload_interval --inspect --noinspect --tag \
-    --event_file"
+    --nopurge_orphaned_data --reload_interval --db --inspect \
+    --noinspect --tag --event_file --path_prefix"
 
 
     #  After completion for some of the options
     case "${prev}" in
-        --logdir)
+        --logdir|--path_prefix)
         	_filedir -d
         	return 0
             ;;
-        --host|--event_file|--port)
+        --host|--event_file|--port|--db)
         	_filedir
         	return 0
             ;;
